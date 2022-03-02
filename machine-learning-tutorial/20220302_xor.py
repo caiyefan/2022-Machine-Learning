@@ -17,7 +17,8 @@ Y = to_categorical(y)
 model = keras.models.Sequential()
 model.add(Input(2, name="input_layer"))
 # model.add(Dense(4, activation="sigmoid"))
-model.add(Dense(2, activation="sigmoid", name="hidden_layer_1"))
+model.add(Dense(4, activation="sigmoid", name="hidden_layer_1"))
+model.add(Dense(2, activation="sigmoid", name="hidden_layer_2"))
 model.add(Dense(2, activation="softmax", name="output_layer"))
 model.compile(loss="categorical_crossentropy",
               optimizer=tf.keras.optimizers.Adam(learning_rate=0.01),
@@ -31,16 +32,16 @@ functors = [K.function([inp], [out]) for out in outputs]
 # test = np.random.random(X.shape)[np.newaxis,...]
 layer_out = [func([X]) for func in functors]
 print(layer_out)
-out_0 = layer_out[0][0]
-
-plt.scatter(out_0[0][0], out_0[0][1], c='red')
-plt.scatter(out_0[1][0], out_0[1][1], c='green')
-plt.scatter(out_0[2][0], out_0[2][1], c='blue')
-plt.scatter(out_0[3][0], out_0[3][1], c='yellow')
-
-plt.show()
-
-
+print(len(layer_out))
+for i in range(len(layer_out)):
+    if i==0:
+        continue
+    out = layer_out[i][0]
+    plt.scatter(out[0][0], out[0][1], c='red')
+    plt.scatter(out[1][0], out[1][1], c='green')
+    plt.scatter(out[2][0], out[2][1], c='blue')
+    plt.scatter(out[3][0], out[3][1], c='yellow')
+    plt.show()
 
 # for i in range(len(y)):
 #     if y[i] == [0]:

@@ -3,10 +3,9 @@ from matplotlib import pyplot as plt
 from sklearn.utils import shuffle
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-from keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 from sklearn import metrics
 from time import *
-from tqdm import tqdm
 import time
 
 def props_to_onehot(props):
