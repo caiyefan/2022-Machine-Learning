@@ -21,8 +21,6 @@ test_y = to_categorical(test_y_)
 train_x = train_x / 255
 test_x = test_x / 255
 
-# test
-
 # model = keras.models.Sequential()
 # model.add(Input(784, name="input_layer"))
 # model.add(Dense(128, activation="sigmoid", name="hidden_layer_1"))
@@ -35,8 +33,8 @@ test_x = test_x / 255
 # model.fit(train_x, train_y, batch_size=128, epochs=50)
 # model.save("saved_model_mnist_3dim_20220303")
 
-# model = keras.models.load_model("saved_model_mnist_3dim_20220303")
-model = keras.models.load_model("/home/caiye/workspace/2022-Machine-Learning/machine-learning-tutorial/saved_model_mnist_3dim_20220303")
+model = keras.models.load_model("saved_model_mnist_3dim_20220303")
+# model = keras.models.load_model("/home/caiye/workspace/2022-Machine-Learning/machine-learning-tutorial/saved_model_mnist_3dim_20220303")
 
 score = model.evaluate(test_x, test_y, verbose=0)
 print("Test loss:", score[0])
