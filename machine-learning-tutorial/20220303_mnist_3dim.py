@@ -21,6 +21,8 @@ test_y = to_categorical(test_y_)
 train_x = train_x / 255
 test_x = test_x / 255
 
+# test
+
 # model = keras.models.Sequential()
 # model.add(Input(784, name="input_layer"))
 # model.add(Dense(128, activation="sigmoid", name="hidden_layer_1"))
