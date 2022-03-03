@@ -7,7 +7,7 @@ from tensorflow.keras.layers import Input, Dense
 from tensorflow.keras.utils import to_categorical
 from keras import backend as K
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 X = np.array(([0, 0], [0, 1], [1, 0], [1, 1]))
 y = np.array(([0], [1], [1], [0]))
@@ -32,13 +32,15 @@ test_y = np.argmax(test_y, axis=1)
 test_Xy = np.column_stack((test_X, test_y))
 
 
-for i in range(len(test_y)):
-    if test_y[i] == 0:
-        plt.scatter(test_X[i][0], test_X[i][1], c='red')
-    elif test_y[i] == 1:
-        plt.scatter(test_X[i][0], test_X[i][1], c='green')
-plt.xlim([-1, 2])
-plt.ylim([-1, 2])
+scatter_x1 = test_X[:,0]
+scatter_x2 = test_X[:,1]
+cdict = {0:'red', 1:'green'}
+
+fig, ax = plt.subplots()
+for y in np.unique(test_y):
+    ix = np.where(test_y == y)
+    ax.scatter(scatter_x1[ix], scatter_x2[ix], c = cdict[y], label = y, s = 20)
+ax.legend()
 plt.show()
 
 inp = model.input
@@ -50,11 +52,15 @@ for i in range(len(layer_out)):
     # if i==0:
     #     continue
     out = layer_out[i][0]
-    for j in range(len(out)):
-        if test_y[j] == 0:
-            plt.scatter(out[j][0], out[j][1], c='red')
-        elif test_y[j] == 1:
-            plt.scatter(out[j][0], out[j][1], c='green')
+
+    scatter_x1 = out[:, 0]
+    scatter_x2 = out[:, 1]
+
+    fig, ax = plt.subplots()
+    for y in np.unique(test_y):
+        ix = np.where(test_y == y)
+        ax.scatter(scatter_x1[ix], scatter_x2[ix], c=cdict[y], label=y, s=20)
+    ax.legend()
     plt.xlim([-1, 2])
     plt.ylim([-1, 2])
     plt.show()
