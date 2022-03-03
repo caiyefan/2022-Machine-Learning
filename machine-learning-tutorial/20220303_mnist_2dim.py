@@ -33,20 +33,18 @@ test_x = test_x / 255
 # model.fit(train_x, train_y, batch_size=128, epochs=200)
 # model.save("mnist_model_20220303")
 
-# model = keras.models.load_model("mnist_model_20220303")
-model = keras.models.load_model("/home/caiye/workspace/2022-Machine-Learning/machine-learning-tutorial/mnist_model_20220303")
+model = keras.models.load_model("saved_model_mnist_2dim_20220303")
+# model = keras.models.load_model("/home/caiye/workspace/2022-Machine-Learning/machine-learning-tutorial/mnist_model_20220303")
 
 score = model.evaluate(test_x, test_y, verbose=0)
 print("Test loss:", score[0])
 print("Test accuracy:", score[1])
-
 
 inp = model.input
 outputs = [layer.output for layer in model.layers]
 functors = [K.function([inp], [out]) for out in outputs]
 layer_out = [func([test_x]) for func in functors]
 out = layer_out[2][0]
-
 
 # plt.scatter(out[:,0], out[:,1])
 # plt.show()

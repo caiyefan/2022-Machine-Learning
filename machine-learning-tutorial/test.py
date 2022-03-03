@@ -1,5 +1,4 @@
 import matplotlib
-# matplotlib.rcParams['backend'] = 'TkAgg'
 print(matplotlib.rcParams['backend'])
 print(matplotlib.rcParams['interactive'])
 print(matplotlib.matplotlib_fname())
